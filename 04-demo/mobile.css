@@ -1,0 +1,28 @@
+.prd-ref { display: grid; justify-items: end; gap: 6px; }
+.prd-ref small { color: #748095; }
+
+@media (max-width: 820px) {
+  body { overflow-x: hidden; }
+  .topbar { padding: 0 12px; }
+  .workspace { max-width: 100%; overflow: hidden; }
+  .content-grid, .panel { min-width: 0; }
+  .filters { display: grid; grid-template-columns: 1fr 1fr; }
+  .filters .search { grid-column: 1 / -1; min-width: 0; }
+  .filters select { min-width: 0; width: 100%; }
+  .table-scroll { overflow: hidden; }
+  .table-scroll table { table-layout: fixed; }
+  .table-scroll th:first-child, .table-scroll td:first-child { width: 42px; }
+  .table-scroll th:nth-child(2), .table-scroll td:nth-child(2) { width: auto; }
+  .table-scroll th:nth-child(3), .table-scroll td:nth-child(3) { width: 84px; }
+  .table-scroll th:nth-child(n+4), .table-scroll td:nth-child(n+4) { display: none; }
+  .table-scroll td:nth-child(2) b { word-break: break-word; }
+  .selection-panel { display: block; }
+  .selection-head, .selection-panel > .wide { grid-column: auto; }
+  .report-cover { display: block; }
+  .risk-seal { margin-top: 16px; }
+  .asset-table { display: block; overflow-x: auto; }
+  .source-list div { grid-template-columns: 1fr; }
+  .report-toolbar { align-items: flex-start; gap: 8px; }
+  .report-toolbar > div:last-child { display: flex; flex-wrap: wrap; justify-content: flex-end; }
+  .prd-ref { justify-items: start; margin-top: 10px; }
+}

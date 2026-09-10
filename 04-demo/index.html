@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>INSIGHT AI 漏洞分析报告</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="mobile.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><span>S</span><div><strong>INSIGHT</strong><small>风险运营管理平台</small></div></div>
+      <nav>
+        <button><i>⌂</i>可视化</button><button><i>▦</i>资产中心</button><button><i>◇</i>风险管理</button>
+        <button><i>◉</i>检测管理</button><button><i>▣</i>工单中心</button><button class="active"><i>▤</i>报告中心</button>
+      </nav>
+      <div class="sidebar-bottom"><span class="avatar">安</span><div>安全运营人员<small>演示账号</small></div><b>···</b></div>
+    </aside>
+
+    <main>
+      <header class="topbar"><span>报告中心 / <b>AI 漏洞分析报告</b></span><div class="topbar-actions"><a class="prd-link" href="../03-prd/index.html" target="_blank" rel="noopener">查看 PRD</a><button class="icon" title="帮助">?</button><button class="icon" title="通知">◌</button></div></header>
+
+      <section class="workspace">
+        <div class="title-row">
+          <div><h1>AI 漏洞分析报告</h1><p>基于平台事实与可信安全知识，生成可追溯、可审核的分析报告</p></div>
+          <div class="prd-ref"><span class="readonly">只读分析 · 不修改漏洞状态</span><small>PRD：INSIGHT-AI-PRD-20260711-01 · VR-01—VR-08</small></div>
+        </div>
+
+        <div class="boundary"><b>公开作品集演示</b><p>页面中的资产、组织、人员和业务数据均为模拟数据，不连接真实生产系统。</p></div>
+
+        <div class="stepper" aria-label="报告生成步骤">
+          <div class="step active" data-step="1"><b>1</b><span>选择分析对象<small>漏洞与资产范围</small></span></div>
+          <i></i><div class="step" data-step="2"><b>2</b><span>配置报告<small>受众与分析深度</small></span></div>
+          <i></i><div class="step" data-step="3"><b>3</b><span>AI 生成<small>检索、生成与校验</small></span></div>
+          <i></i><div class="step" data-step="4"><b>4</b><span>审核导出<small>人工确认后使用</small></span></div>
+        </div>
+
+        <section id="selectView" class="view active">
+          <div class="content-grid">
+            <section class="panel">
+              <div class="panel-head"><div><h2>选择漏洞</h2><p>支持单个漏洞深度分析，也可合并同类漏洞</p></div><span id="selectedCount">已选择 1 项</span></div>
+              <div class="filters"><label class="search">⌕<input id="searchInput" placeholder="搜索漏洞名称、CVE 或资产 IP"></label><select id="levelFilter"><option value="all">全部等级</option><option>严重</option><option>高危</option></select><select><option>全部状态</option><option>待处理</option><option>确认中</option></select></div>
+              <div class="table-scroll"><table><thead><tr><th></th><th>漏洞</th><th>等级 / VPT</th><th>影响资产</th><th>暴露面</th><th>状态</th></tr></thead><tbody id="vulnRows"></tbody></table></div>
+            </section>
+            <aside class="selection-panel">
+              <div class="selection-head"><h2>本次分析范围</h2><button id="clearSelection">清空</button></div>
+              <div id="selectionSummary"></div>
+              <div class="scope-facts"><div><small>漏洞</small><strong id="scopeVulns">1</strong></div><div><small>资产</small><strong id="scopeAssets">3</strong></div><div><small>组织</small><strong id="scopeOrgs">1</strong></div></div>
+              <div class="boundary"><b>AI 安全边界</b><p>平台字段由系统直接读取，AI 不计算等级、VPT、资产数量或状态。</p></div>
+              <button class="primary wide" id="toConfig">下一步：配置报告 <span>→</span></button>
+            </aside>
+          </div>
+        </section>
+
+        <section id="configView" class="view">
+          <div class="config-layout">
+            <section class="panel config-panel">
+              <div class="panel-head"><div><h2>配置报告</h2><p>选择报告受众，系统自动调整表达重点</p></div></div>
+              <h3>报告受众</h3><div class="choice-grid" id="audienceChoices"><button class="choice active" data-value="运营"><b>安全运营</b><span>风险研判、影响面与处置动作</span></button><button class="choice" data-value="管理"><b>管理汇报</b><span>业务影响、风险结论与决策建议</span></button><button class="choice" data-value="修复"><b>技术修复</b><span>漏洞机理、修复步骤与复测标准</span></button></div>
+              <h3>报告结构</h3><div class="check-grid"><label><input type="checkbox" checked> 执行摘要</label><label><input type="checkbox" checked> 漏洞技术分析</label><label><input type="checkbox" checked> 企业影响面</label><label><input type="checkbox" checked> 风险优先级依据</label><label><input type="checkbox" checked> 修复与缓解建议</label><label><input type="checkbox" checked> 复测与验收标准</label></div>
+              <h3>分析策略</h3><div class="strategy-row"><label>报告名称<input id="reportName" value="CVE-2024-38077 漏洞专项分析报告"></label><label>知识截止时间<input type="date" value="2026-07-11"></label><label>内容深度<select id="depth"><option>标准分析</option><option>深度技术分析</option><option>管理摘要</option></select></label></div>
+              <div class="config-actions"><button class="secondary" id="backSelect">上一步</button><button class="primary" id="startGenerate">开始生成报告 <span>✦</span></button></div>
+            </section>
+            <aside class="evidence-preview"><h2>将使用的数据</h2><div><b>INSIGHT 业务数据</b><p>漏洞字段、3 个受影响资产、组织与负责人、暴露状态、处置进度</p></div><div><b>可信安全知识</b><p>已审核企业知识库、厂商安全公告、CVE/CWE 与修复经验</p></div><div><b>生成约束</b><p>无来源不输出补丁版本；信息冲突时标记“待确认”</p></div></aside>
+          </div>
+        </section>
+
+        <section id="generateView" class="view">
+          <div class="generation-card"><div class="ai-orbit">AI</div><h2>正在生成漏洞分析报告</h2><p id="generationStatus">读取漏洞与资产上下文...</p><div class="progress"><span id="progressBar"></span></div><strong id="progressValue">12%</strong><div class="pipeline" id="pipeline"><span class="running">读取平台事实</span><span>检索可信知识</span><span>生成结构化报告</span><span>事实与引用校验</span></div><div class="live-log" id="liveLog">已读取 CVE、VPT、漏洞等级、状态与影响资产</div></div>
+        </section>
+
+        <section id="reportView" class="view">
+          <div class="report-toolbar"><div><button class="secondary" id="backConfig">← 重新配置</button><span class="saved">✓ 草稿已保存</span></div><div><button class="secondary" id="regenerate">↻ 重新生成</button><button class="secondary" id="printReport">导出 PDF</button><button class="primary" id="confirmReport">确认报告</button></div></div>
+          <div class="report-layout">
+            <aside class="report-nav"><small>报告目录</small><button class="active" data-target="summary">01 执行摘要</button><button data-target="technical">02 漏洞技术分析</button><button data-target="impact">03 企业影响面</button><button data-target="priority">04 优先级依据</button><button data-target="remediation">05 修复与缓解</button><button data-target="verification">06 复测与验收</button><button data-target="sources">07 证据与引用</button><div class="quality-box"><span>报告可信度</span><strong>94%</strong><small>14 项事实已校验<br>1 项待人工确认</small></div></aside>
+            <article class="report-paper" id="reportPaper">
+              <div class="report-cover"><div><span>INSIGHT AI GENERATED REPORT</span><h1 id="reportTitle">CVE-2024-38077 漏洞专项分析报告</h1><p>报告编号：INS-AI-20260711-0086 · 生成时间：2026-07-11 15:42</p></div><div class="risk-seal">严重<small>VPT P0</small></div></div>
+              <div class="disclaimer">本报告由 AI 基于 INSIGHT 平台事实和可信知识生成，已通过自动事实校验；正式处置前仍需安全人员确认。</div>
+              <section id="summary" contenteditable="true"><div class="section-title"><small>01</small><h2>执行摘要</h2><span>AI 生成 · 可编辑</span></div><p class="lead">CVE-2024-38077 是影响 Windows 远程桌面服务的远程代码执行漏洞。本次分析确认该风险关联 <b>3 台资产</b>，其中 1 台为互联网暴露核心资产，当前均未进入修复流程，建议按最高优先级启动应急处置。</p><div class="conclusion"><b>风险结论</b><p>攻击者可能在无需有效账户的条件下，通过构造网络请求触发远程代码执行。由于暴露面、资产重要性与处置状态叠加，企业实际风险高于通用漏洞评分所表达的风险。</p></div><div class="action-list"><b>建议今日完成</b><ol><li>确认 192.0.2.10 的系统版本与 RDP 暴露必要性。</li><li>收敛互联网访问来源，并安排补丁变更窗口。</li><li>为 3 台受影响资产建立修复任务，修复后统一复测。</li></ol></div></section>
+              <section id="technical" contenteditable="true"><div class="section-title"><small>02</small><h2>漏洞技术分析</h2><span>AI 生成 · 可编辑</span></div><div class="fact-table"><div><span>CVE</span><b>CVE-2024-38077</b></div><div><span>漏洞类型</span><b>远程代码执行</b></div><div><span>风险等级</span><b>严重 / VPT P0</b></div><div><span>攻击面</span><b>Windows 远程桌面服务</b></div></div><p>该漏洞位于远程桌面相关服务的输入处理链路。成功利用可能使攻击者以高权限执行任意代码，进而控制主机、横向移动或访问业务数据。实际可利用性仍取决于系统版本、服务配置与网络可达性。</p><div class="pending"><b>待确认</b><p>平台尚未同步 2 台资产的完整 Windows 补丁版本，因此不能直接断言其处于可利用状态，也不生成未经证据支持的具体补丁编号。</p></div></section>
+              <section id="impact" contenteditable="true"><div class="section-title"><small>03</small><h2>企业影响面</h2><span>系统事实 + AI 解释</span></div><table class="asset-table"><thead><tr><th>资产</th><th>组织 / 负责人</th><th>业务属性</th><th>暴露面</th><th>处置状态</th></tr></thead><tbody><tr><td><b>192.0.2.10</b><small>Windows Server</small></td><td>示例组织 / 示例负责人</td><td>核心研发环境</td><td><em>互联网暴露</em></td><td>待处理</td></tr><tr><td><b>198.51.100.20</b><small>Windows Server</small></td><td>示例组织 / 示例负责人</td><td>内部构建节点</td><td>内网可达</td><td>待处理</td></tr><tr><td><b>203.0.113.30</b><small>Windows Server</small></td><td>示例组织 / 示例负责人</td><td>测试环境</td><td>内网可达</td><td>确认中</td></tr></tbody></table><p>互联网暴露资产是首要控制对象；另外两台内网资产虽然攻击面较小，但与研发网络相连，仍需防范横向移动路径。</p></section>
+              <section id="priority" contenteditable="true"><div class="section-title"><small>04</small><h2>处置优先级依据</h2><span>规则引擎计算</span></div><div class="reason-cards"><div><b>VPT P0</b><span>平台最高优先级</span></div><div><b>核心资产</b><span>承载研发业务</span></div><div><b>互联网暴露</b><span>外部攻击可达</span></div><div><b>尚未闭环</b><span>2 待处理 / 1 确认中</span></div></div><p>优先级由 INSIGHT 规则引擎根据 VPT、资产重要性、暴露状态和处置进度计算，AI 仅解释排序原因。</p></section>
+              <section id="remediation" contenteditable="true"><div class="section-title"><small>05</small><h2>修复与缓解建议</h2><span>AI 生成 · 引用知识</span></div><div class="timeline"><div><b>立即控制 · 0—4 小时</b><p>确认 RDP 是否必须对互联网开放；限制来源 IP，启用边界访问控制与异常登录监控。</p></div><div><b>正式修复 · 24—48 小时</b><p>核验操作系统版本，根据微软官方公告选择适用的安全更新；先在测试环境验证，再按变更流程部署。</p></div><div><b>持续治理 · 7 天内</b><p>排查同版本资产，核对远程管理服务暴露策略，并将复测结果回写现有漏洞流程。</p></div></div><div class="guardrail">AI 不会自动执行补丁安装、修改漏洞状态或关闭漏洞。</div></section>
+              <section id="verification" contenteditable="true"><div class="section-title"><small>06</small><h2>复测与验收标准</h2><span>AI 生成 · 可编辑</span></div><ul class="verification-list"><li><b>版本验收</b>记录变更前后系统版本和补丁安装结果。</li><li><b>业务验收</b>远程管理及关联业务功能验证通过。</li><li><b>安全复测</b>通过原扫描器重新检测，目标资产不再命中该漏洞。</li><li><b>闭环条件</b>复测证据上传后，由安全运营人员人工确认关闭。</li></ul></section>
+              <section id="sources"><div class="section-title"><small>07</small><h2>证据与引用</h2><span>可追溯</span></div><div class="source-list"><div><b>[1] INSIGHT 漏洞记录</b><span>CVE、等级、VPT、状态、影响资产 · 实时读取</span><em>平台事实</em></div><div><b>[2] INSIGHT 资产中心</b><span>组织、负责人、核心属性、互联网暴露 · 15:41 更新</span><em>平台事实</em></div><div><b>[3] Microsoft Security Response Center</b><span>Windows Remote Desktop Licensing Service Remote Code Execution Vulnerability</span><em>厂商公告</em></div><div><b>[4] INSIGHT 已审核企业知识库</b><span>Windows 漏洞变更与复测规范 · v3.2 · 已审核</span><em>内部知识</em></div></div></section>
+            </article>
+            <aside class="review-panel"><h3>AI 质量检查</h3><div class="review-ok"><b>✓ 事实校验通过</b><p>CVE、等级、状态、资产和组织与平台记录一致</p></div><div class="review-ok"><b>✓ 引用完整</b><p>所有修复结论均关联可信来源</p></div><div class="review-warn"><b>! 1 项待确认</b><p>2 台资产缺少完整补丁版本</p></div><h3>人工审核</h3><label><input type="checkbox" id="checkFacts"> 已核对平台事实</label><label><input type="checkbox" id="checkAdvice"> 已确认修复建议</label><label><input type="checkbox" id="checkBoundary"> 已处理待确认项</label><textarea id="reviewNote" placeholder="填写审核备注（选填）"></textarea><small>报告确认后将记录确认人、时间和报告版本。</small></aside>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
