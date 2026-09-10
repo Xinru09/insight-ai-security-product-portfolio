@@ -1,0 +1,915 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="INSIGHT AI漏洞运营助手 2026 Q4 产品Roadmap：RICE优先级、12周甘特图、验收指标与风险决策门。">
+  <title>INSIGHT AI漏洞运营助手｜2026 Q4 产品Roadmap</title>
+  <style>
+    :root {
+      --navy: #17365d;
+      --blue: #2e75b6;
+      --blue-dark: #1f4e78;
+      --blue-pale: #eaf3f8;
+      --blue-soft: #d9eaf7;
+      --green: #2e7d32;
+      --green-pale: #e8f5e9;
+      --amber: #b26a00;
+      --amber-pale: #fff4e5;
+      --red: #b42318;
+      --ink: #1f2937;
+      --muted: #667085;
+      --line: #d6dde5;
+      --paper: #fff;
+      --canvas: #f3f6f9;
+      --shadow: 0 16px 48px rgba(23, 54, 93, .09);
+      --radius: 18px;
+      --content: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--canvas);
+      font-family: Inter, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; }
+    button { font: inherit; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid rgba(214, 221, 229, .9);
+      background: rgba(255, 255, 255, .9);
+      backdrop-filter: blur(14px);
+    }
+
+    .topbar-inner {
+      width: min(var(--content), calc(100% - 40px));
+      min-height: 64px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand {
+      margin-right: auto;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: .03em;
+      white-space: nowrap;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      white-space: nowrap;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .nav::-webkit-scrollbar { display: none; }
+    .nav a { text-decoration: none; }
+    .nav a:hover { color: var(--blue); }
+
+    .print-btn {
+      flex: 0 0 auto;
+      padding: 8px 14px;
+      border: 1px solid var(--blue);
+      border-radius: 999px;
+      color: var(--blue-dark);
+      background: #fff;
+      cursor: pointer;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(var(--content), calc(100% - 40px));
+      margin: 30px auto 64px;
+      overflow: hidden;
+      border: 1px solid #e5eaf0;
+      border-radius: 24px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      position: relative;
+      padding: 72px 72px 64px;
+      color: #fff;
+      background:
+        radial-gradient(circle at 86% 18%, rgba(91, 165, 219, .32), transparent 26%),
+        linear-gradient(135deg, #122c4d 0%, #1f4e78 58%, #2e75b6 100%);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -90px;
+      bottom: -125px;
+      width: 360px;
+      height: 360px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 50%;
+      box-shadow: 0 0 0 45px rgba(255,255,255,.04), 0 0 0 90px rgba(255,255,255,.025);
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: #c6e4f8;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 830px;
+      margin-bottom: 18px;
+      font-size: clamp(38px, 6vw, 70px);
+      line-height: 1.08;
+      letter-spacing: -.035em;
+    }
+
+    .hero-subtitle {
+      max-width: 800px;
+      margin-bottom: 34px;
+      font-size: clamp(18px, 2.2vw, 26px);
+      line-height: 1.45;
+      color: #e7f4fc;
+    }
+
+    .meta {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .meta span {
+      padding: 7px 12px;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 999px;
+      background: rgba(255,255,255,.09);
+      font-size: 13px;
+      color: #eef8ff;
+    }
+
+    main { padding: 26px 72px 76px; }
+    section {
+      padding: 54px 0;
+      border-bottom: 1px solid #e7ebf0;
+      scroll-margin-top: 88px;
+    }
+    section:last-child { border-bottom: 0; }
+
+    .section-kicker {
+      margin: 0 0 5px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin-bottom: 24px;
+      color: var(--navy);
+      font-size: clamp(28px, 4vw, 40px);
+      line-height: 1.25;
+      letter-spacing: -.025em;
+    }
+
+    h3 {
+      margin: 30px 0 12px;
+      color: var(--blue-dark);
+      font-size: 21px;
+      line-height: 1.4;
+    }
+
+    .lead {
+      max-width: 900px;
+      margin-bottom: 28px;
+      font-size: 18px;
+      color: #344054;
+    }
+
+    .callout {
+      margin: 24px 0;
+      padding: 20px 22px;
+      border-left: 4px solid var(--blue);
+      border-radius: 0 12px 12px 0;
+      background: var(--blue-pale);
+    }
+
+    .callout strong { color: var(--blue-dark); }
+    .callout.green {
+      border-left-color: var(--green);
+      background: var(--green-pale);
+    }
+    .callout.green strong { color: var(--green); }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .card {
+      padding: 22px;
+      border: 1px solid #dfe5ec;
+      border-radius: var(--radius);
+      background: #fff;
+    }
+    .card.accent { border-top: 4px solid var(--blue); }
+    .card h3 { margin-top: 0; }
+    .card p:last-child { margin-bottom: 0; }
+
+    .metric-value {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--blue-dark);
+      font-size: 31px;
+      font-weight: 850;
+      line-height: 1;
+    }
+    .metric-label { color: var(--muted); font-size: 14px; }
+
+    .flow {
+      display: flex;
+      align-items: stretch;
+      gap: 8px;
+      margin: 26px 0;
+    }
+    .flow-item {
+      flex: 1;
+      min-width: 0;
+      padding: 17px 14px;
+      border-radius: 12px;
+      background: var(--blue-pale);
+      text-align: center;
+      font-weight: 750;
+      color: var(--blue-dark);
+    }
+    .flow-arrow {
+      display: grid;
+      place-items: center;
+      color: var(--blue);
+      font-size: 22px;
+    }
+
+    ul.clean {
+      margin: 16px 0 0;
+      padding-left: 22px;
+    }
+    ul.clean li { margin: 7px 0; }
+
+    .table-wrap {
+      width: 100%;
+      margin: 22px 0 30px;
+      overflow-x: auto;
+      border: 1px solid #d6dde5;
+      border-radius: 14px;
+    }
+
+    table {
+      width: 100%;
+      min-width: 760px;
+      border-collapse: collapse;
+      background: #fff;
+      font-size: 14px;
+    }
+    th, td {
+      padding: 14px 15px;
+      border-right: 1px solid #d6dde5;
+      border-bottom: 1px solid #d6dde5;
+      text-align: left;
+      vertical-align: middle;
+    }
+    th:last-child, td:last-child { border-right: 0; }
+    tr:last-child td { border-bottom: 0; }
+    thead th {
+      color: #fff;
+      background: #25577f;
+      font-weight: 780;
+      text-align: center;
+    }
+    tbody tr:nth-child(even) { background: #f8fafc; }
+    td.center { text-align: center; }
+    td.strong { font-weight: 780; }
+
+    .rice-score {
+      display: inline-grid;
+      min-width: 54px;
+      height: 32px;
+      place-items: center;
+      border-radius: 999px;
+      color: #fff;
+      background: var(--blue);
+      font-weight: 850;
+    }
+
+    .priority-list {
+      position: relative;
+      display: grid;
+      gap: 12px;
+      margin: 24px 0;
+    }
+    .priority-row {
+      display: grid;
+      grid-template-columns: 42px 220px 150px 1fr;
+      align-items: center;
+      gap: 14px;
+      padding: 15px 17px;
+      border: 1px solid #dfe5ec;
+      border-radius: 14px;
+      background: #fff;
+    }
+    .priority-number {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--navy);
+      font-weight: 850;
+    }
+    .priority-name { font-weight: 820; }
+    .priority-role { color: var(--blue); font-weight: 760; }
+    .priority-reason { color: var(--muted); font-size: 14px; }
+
+    .req-card {
+      display: grid;
+      grid-template-columns: 84px 1fr;
+      gap: 18px;
+      padding: 23px;
+      border: 1px solid #dfe5ec;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, #fff, #fbfdff);
+    }
+    .req-code {
+      display: grid;
+      width: 66px;
+      height: 66px;
+      place-items: center;
+      border-radius: 18px;
+      color: #fff;
+      background: var(--navy);
+      font-size: 21px;
+      font-weight: 850;
+    }
+    .req-card h3 { margin: 0 0 8px; }
+    .req-meta { display: grid; gap: 7px; font-size: 14px; }
+    .req-meta strong { color: var(--blue-dark); }
+
+    .phase {
+      position: relative;
+      padding: 26px;
+      border: 1px solid #dfe5ec;
+      border-radius: var(--radius);
+      background: #fff;
+    }
+    .phase::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 5px;
+      border-radius: 18px 0 0 18px;
+      background: var(--blue);
+    }
+    .phase-time {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      color: var(--blue-dark);
+      background: var(--blue-pale);
+      font-size: 12px;
+      font-weight: 820;
+    }
+    .phase h3 { margin: 0 0 8px; }
+
+    .gantt-wrap {
+      margin-top: 28px;
+      overflow-x: auto;
+      border: 1px solid #cfd8e3;
+      border-radius: 14px;
+    }
+    .gantt { min-width: 1040px; table-layout: fixed; font-size: 12px; }
+    .gantt th:first-child, .gantt td:first-child {
+      width: 240px;
+      text-align: left;
+      font-weight: 760;
+    }
+    .gantt th:not(:first-child), .gantt td:not(:first-child) {
+      width: 64px;
+      padding: 11px 5px;
+      text-align: center;
+    }
+    .gantt .run {
+      color: var(--blue);
+      background: var(--blue-soft);
+      font-size: 16px;
+      font-weight: 900;
+    }
+    .gantt .milestone {
+      color: var(--green);
+      background: var(--green-pale);
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin: 12px 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .legend b { color: var(--blue); }
+    .legend b.green { color: var(--green); }
+
+    .risk-high { color: var(--red); font-weight: 800; }
+    .risk-medium { color: var(--amber); font-weight: 800; }
+
+    .decision {
+      padding: 18px 20px;
+      border: 1px solid #f0d4a8;
+      border-radius: 14px;
+      background: var(--amber-pale);
+    }
+
+    .footer {
+      padding: 24px 72px;
+      color: #d8e9f5;
+      background: var(--navy);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .nav { display: none; }
+      .hero, main { padding-left: 28px; padding-right: 28px; }
+      .grid.two, .grid.three, .grid.four { grid-template-columns: 1fr; }
+      .priority-row { grid-template-columns: 42px 1fr; }
+      .priority-role, .priority-reason { grid-column: 2; }
+      .flow { flex-direction: column; }
+      .flow-arrow { transform: rotate(90deg); }
+    }
+
+    @media (max-width: 560px) {
+      .topbar-inner, .page { width: min(100% - 20px, var(--content)); }
+      .page { margin-top: 10px; border-radius: 16px; }
+      .hero { padding: 46px 22px; }
+      main { padding: 18px 22px 48px; }
+      section { padding: 42px 0; }
+      .req-card { grid-template-columns: 1fr; }
+      .footer { padding: 24px; }
+    }
+
+    @page { size: A4 portrait; margin: 13mm; }
+    @media print {
+      :root { --canvas: #fff; }
+      body { background: #fff; font-size: 10pt; }
+      .topbar { display: none; }
+      .page {
+        width: 100%;
+        margin: 0;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+      }
+      .hero {
+        min-height: 225mm;
+        padding: 30mm 18mm;
+        break-after: page;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+      main { padding: 0; }
+      section {
+        padding: 10mm 0;
+        break-inside: auto;
+      }
+      h2, h3 { break-after: avoid; }
+      .card, .phase, .req-card, .callout, .decision,
+      .table-wrap, .priority-row { break-inside: avoid; }
+      .table-wrap { overflow: visible; }
+      table { min-width: 0; font-size: 8.2pt; }
+      th, td { padding: 7px 8px; }
+      .gantt { min-width: 0; table-layout: fixed; font-size: 7pt; }
+      .gantt th:first-child, .gantt td:first-child { width: 26%; }
+      .gantt th:not(:first-child), .gantt td:not(:first-child) {
+        width: auto;
+        padding: 6px 2px;
+      }
+      .footer { margin-top: 8mm; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      a { text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">INSIGHT AI · 产品 Roadmap</div>
+      <nav class="nav" aria-label="页面目录">
+        <a href="#overview">规划概览</a>
+        <a href="#priority">优先级</a>
+        <a href="#scope">需求范围</a>
+        <a href="#roadmap">12周计划</a>
+        <a href="#metrics">验收指标</a>
+        <a href="#risk">风险决策</a>
+      </nav>
+      <a class="print-btn" href="rice-and-gantt.xlsx" download>下载规划工作簿</a>
+    </div>
+  </header>
+
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">INSIGHT AI · Quarterly Product Plan</p>
+      <h1>漏洞运营助手</h1>
+      <p class="hero-subtitle">2026 Q4 产品 Roadmap：从可信报告生成，升级为可追踪、可验收的漏洞运营辅助闭环。</p>
+      <div class="meta" aria-label="文档信息">
+        <span>规划周期：2026 Q4</span>
+        <span>12 个交付周</span>
+        <span>MVP Demo → 可信可用 → 辅助闭环</span>
+        <span>版本 V1.0 · 2026-07-23</span>
+      </div>
+    </header>
+
+    <main>
+      <section id="overview">
+        <p class="section-kicker">Executive Summary</p>
+        <h2>季度规划概览</h2>
+        <p class="lead">当前产品已完成“AI 漏洞分析报告助手”的 PRD 与高保真 Demo。本季度不再只验证“能否生成报告”，而是验证报告能否进入真实处置流程，并持续辅助运营人员推进到复测验收。</p>
+
+        <div class="callout">
+          <strong>季度主张：</strong>
+          从“生成一份可信报告”升级为“辅助完成一次可追踪、可验收的漏洞处置”，建立报告、计划、工单、跟踪、复测的运营闭环。
+        </div>
+
+        <div class="grid four" aria-label="本季度成功定义">
+          <article class="card accent">
+            <span class="metric-value">≥95%</span>
+            <span class="metric-label">关键平台事实测试准确率</span>
+          </article>
+          <article class="card accent">
+            <span class="metric-value">≥90%</span>
+            <span class="metric-label">重要修复结论引用覆盖率</span>
+          </article>
+          <article class="card accent">
+            <span class="metric-value">≥95%</span>
+            <span class="metric-label">人工确认后工单创建成功率</span>
+          </article>
+          <article class="card accent">
+            <span class="metric-value">≥90%</span>
+            <span class="metric-label">核心辅助闭环任务完成率</span>
+          </article>
+        </div>
+
+        <h3>产品演进路径</h3>
+        <div class="flow" aria-label="产品演进路径">
+          <div class="flow-item">可信报告助手</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-item">漏洞处置协同助手</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-item">漏洞运营闭环助手</div>
+        </div>
+
+        <h3>三层系统分工</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>层级</th><th>核心职责</th><th>典型输出</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="strong">用户操作层</td><td>选择、配置、审核、确认与业务决策</td><td>审核报告；确认工单；确认复测与关闭</td></tr>
+              <tr><td class="strong">INSIGHT 平台层</td><td>提供确定性事实、权限与业务状态</td><td>漏洞、资产、组织、状态、SLA 与工单事实</td></tr>
+              <tr><td class="strong">AI 能力层</td><td>知识检索、风险解释、内容生成与一致性校验</td><td>报告、修复计划、工单草稿与复测清单</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>产品边界</h3>
+        <div class="grid two">
+          <article class="card">
+            <strong>AI 可以做</strong>
+            <ul class="clean">
+              <li>解释风险、提供修复建议与流程辅助。</li>
+              <li>生成报告、计划、工单草稿和复测清单。</li>
+              <li>检查引用、发现信息不足与事实冲突。</li>
+            </ul>
+          </article>
+          <article class="card">
+            <strong>AI 不可以做</strong>
+            <ul class="clean">
+              <li>自动安装补丁或执行修复操作。</li>
+              <li>未经人工确认自动派发工单。</li>
+              <li>直接修改漏洞状态或自动关闭漏洞。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <p class="section-kicker">Objectives</p>
+        <h2>季度目标与非目标</h2>
+        <div class="callout green">
+          <strong>北极星目标：</strong>
+          建立从可信报告、修复计划、工单创建、状态跟踪到复测验收的漏洞运营辅助闭环。
+        </div>
+        <div class="grid two">
+          <article class="card">
+            <h3>O1 可信可用</h3>
+            <p>平台事实可校验，重要结论有可靠引用，信息不足时生成待确认项。</p>
+          </article>
+          <article class="card">
+            <h3>O2 进入处置</h3>
+            <p>将经审核的报告转化为结构化修复计划和可提交的工单草稿。</p>
+          </article>
+          <article class="card">
+            <h3>O3 辅助闭环</h3>
+            <p>统一跟踪负责人、状态与 SLA，并支持复测清单和人工验收。</p>
+          </article>
+          <article class="card">
+            <h3>O4 验证价值</h3>
+            <p>邀请 3–5 名安全运营人员和 1 名安全负责人完成试点与复盘。</p>
+          </article>
+        </div>
+        <h3>本季度非目标</h3>
+        <ul class="clean">
+          <li>建设完全自治的漏洞处置 Agent。</li>
+          <li>覆盖补丁分发、资产变更或终端自动化执行。</li>
+          <li>替代现有工单系统或重构 INSIGHT 全量漏洞生命周期。</li>
+          <li>在生产接入未验证前承诺全量推广或无人值守运行。</li>
+        </ul>
+      </section>
+
+      <section id="priority">
+        <p class="section-kicker">Prioritization</p>
+        <h2>RICE 量化优先级</h2>
+        <p class="lead">使用 RICE 评估需求的相对价值，减少仅凭主观偏好排序。RICE 决定价值优先级；实际实施顺序还需叠加可信基础、接口、权限与业务链路依赖。</p>
+        <div class="callout">
+          <strong>RICE = Reach × Impact × Confidence ÷ Effort</strong>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>排名</th><th>需求</th><th>Reach</th><th>Impact</th><th>Confidence</th><th>Effort</th><th>RICE</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="center">1</td><td class="strong">P2 修复计划生成</td><td class="center">5</td><td class="center">2</td><td class="center">80%</td><td class="center">1</td><td class="center"><span class="rice-score">8.0</span></td></tr>
+              <tr><td class="center">2</td><td class="strong">P1 可信报告增强</td><td class="center">5</td><td class="center">3</td><td class="center">80%</td><td class="center">2</td><td class="center"><span class="rice-score">6.0</span></td></tr>
+              <tr><td class="center">3</td><td class="strong">P3 工单辅助创建</td><td class="center">4</td><td class="center">3</td><td class="center">50%</td><td class="center">2</td><td class="center"><span class="rice-score">3.0</span></td></tr>
+              <tr><td class="center">4</td><td class="strong">P4 处置状态跟踪</td><td class="center">3</td><td class="center">2</td><td class="center">50%</td><td class="center">2</td><td class="center"><span class="rice-score">1.5</span></td></tr>
+              <tr><td class="center">5</td><td class="strong">P5 复测验收辅助</td><td class="center">3</td><td class="center">2</td><td class="center">50%</td><td class="center">3</td><td class="center"><span class="rice-score">1.0</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>从价值排序到实施排序</h3>
+        <div class="priority-list">
+          <div class="priority-row"><span class="priority-number">1</span><span class="priority-name">P1 可信报告增强</span><span class="priority-role">可信基础</span><span class="priority-reason">为后续修复、工单和复测提供可校验事实与引用。</span></div>
+          <div class="priority-row"><span class="priority-number">2</span><span class="priority-name">P2 修复计划生成</span><span class="priority-role">结构化行动</span><span class="priority-reason">依赖 P1 的事实与知识证据，输出修复和验收清单。</span></div>
+          <div class="priority-row"><span class="priority-number">3</span><span class="priority-name">P3 工单辅助创建</span><span class="priority-role">进入流程</span><span class="priority-reason">依赖已确认报告、修复计划、权限和字段映射。</span></div>
+          <div class="priority-row"><span class="priority-number">4</span><span class="priority-name">P4 处置状态跟踪</span><span class="priority-role">持续协同</span><span class="priority-reason">依赖工单创建及负责人、状态和 SLA 回流。</span></div>
+          <div class="priority-row"><span class="priority-number">5</span><span class="priority-name">P5 复测验收辅助</span><span class="priority-role">形成闭环</span><span class="priority-reason">依赖处置完成状态、复测数据和人工确认机制。</span></div>
+        </div>
+      </section>
+
+      <section id="scope">
+        <p class="section-kicker">Scope</p>
+        <h2>核心需求范围</h2>
+        <div class="grid two">
+          <article class="req-card">
+            <div class="req-code">P1</div>
+            <div>
+              <h3>可信报告增强</h3>
+              <div class="req-meta">
+                <span><strong>目标：</strong>关键结论可追溯，平台事实可校验。</span>
+                <span><strong>能力：</strong>可信知识引用、平台事实校验、引用完整性检查、事实冲突提示、待确认项。</span>
+                <span><strong>完成标准：</strong>关键事实准确；重要结论有引用；信息不足不臆测。</span>
+              </div>
+            </div>
+          </article>
+          <article class="req-card">
+            <div class="req-code">P2</div>
+            <div>
+              <h3>修复计划生成</h3>
+              <div class="req-meta">
+                <span><strong>目标：</strong>将风险解释转化为可执行的处置方案。</span>
+                <span><strong>能力：</strong>缓解措施、修复步骤、责任建议、前置条件、回滚提示、验收清单。</span>
+                <span><strong>完成标准：</strong>结构化输出；步骤可编辑；与报告证据一致。</span>
+              </div>
+            </div>
+          </article>
+          <article class="req-card">
+            <div class="req-code">P3</div>
+            <div>
+              <h3>工单辅助创建</h3>
+              <div class="req-meta">
+                <span><strong>目标：</strong>从已确认内容生成可提交的工单草稿。</span>
+                <span><strong>能力：</strong>字段映射、草稿预览、必填校验、人工确认、创建结果回写。</span>
+                <span><strong>完成标准：</strong>字段完整率 ≥95%；未确认不得创建；失败可定位。</span>
+              </div>
+            </div>
+          </article>
+          <article class="req-card">
+            <div class="req-code">P4</div>
+            <div>
+              <h3>处置状态跟踪</h3>
+              <div class="req-meta">
+                <span><strong>目标：</strong>统一展示处置进展和风险。</span>
+                <span><strong>能力：</strong>负责人、状态、SLA、逾期、阻塞原因、工单链接和摘要视图。</span>
+                <span><strong>完成标准：</strong>与源系统一致；逾期计算正确；变更可追溯。</span>
+              </div>
+            </div>
+          </article>
+          <article class="req-card">
+            <div class="req-code">P5</div>
+            <div>
+              <h3>复测验收辅助</h3>
+              <div class="req-meta">
+                <span><strong>目标：</strong>帮助完成复测准备、结果汇总与人工验收。</span>
+                <span><strong>能力：</strong>复测清单、结果汇总、异常提示、验收建议和人工确认。</span>
+                <span><strong>完成标准：</strong>关闭前必须人工确认；证据不足不得建议直接关闭。</span>
+              </div>
+            </div>
+          </article>
+          <article class="card">
+            <h3>跨需求控制要求</h3>
+            <ul class="clean">
+              <li>沿用 INSIGHT 权限模型，AI 不扩大可见范围。</li>
+              <li>保留事实来源、知识来源、版本和人工修改记录。</li>
+              <li>关键动作设置人工确认点，并支持能力降级。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="roadmap">
+        <p class="section-kicker">12-Week Plan</p>
+        <h2>12 周产品 Roadmap</h2>
+        <div class="grid three">
+          <article class="phase">
+            <span class="phase-time">W1–W4</span>
+            <h3>Phase 1 · 可信可用</h3>
+            <p>让 AI 报告可信并能指导修复。</p>
+            <ul class="clean">
+              <li>P1 可信报告增强</li>
+              <li>P2 修复计划生成</li>
+              <li>里程碑：可信报告版本完成</li>
+            </ul>
+          </article>
+          <article class="phase">
+            <span class="phase-time">W5–W8</span>
+            <h3>Phase 2 · 进入处置</h3>
+            <p>将报告转化为真实处置任务。</p>
+            <ul class="clean">
+              <li>P3 工单辅助创建</li>
+              <li>P4 处置状态跟踪</li>
+              <li>里程碑：工单协同版本完成</li>
+            </ul>
+          </article>
+          <article class="phase">
+            <span class="phase-time">W9–W12</span>
+            <h3>Phase 3 · 辅助闭环</h3>
+            <p>支持复测验收并验证用户价值。</p>
+            <ul class="clean">
+              <li>P5 复测验收辅助</li>
+              <li>用户试点与迭代</li>
+              <li>里程碑：闭环试点与季度复盘</li>
+            </ul>
+          </article>
+        </div>
+
+        <h3>甘特图</h3>
+        <div class="legend"><span><b>■</b> 执行</span><span><b class="green">◆</b> 阶段里程碑</span></div>
+        <div class="gantt-wrap">
+          <table class="gantt" aria-label="12周甘特图">
+            <thead>
+              <tr><th>任务</th><th>W1</th><th>W2</th><th>W3</th><th>W4</th><th>W5</th><th>W6</th><th>W7</th><th>W8</th><th>W9</th><th>W10</th><th>W11</th><th>W12</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>需求确认与产品方案</td><td class="run">■</td><td class="run">■</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td>P1 可信报告增强</td><td></td><td class="run">■</td><td class="run">■</td><td class="milestone">◆</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td>P2 修复计划生成</td><td></td><td></td><td class="run">■</td><td class="milestone">◆</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td>P3 工单辅助创建</td><td></td><td></td><td></td><td></td><td class="run">■</td><td class="run">■</td><td class="milestone">◆</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td>P4 处置状态跟踪</td><td></td><td></td><td></td><td></td><td></td><td class="run">■</td><td class="run">■</td><td class="milestone">◆</td><td></td><td></td><td></td><td></td></tr>
+              <tr><td>P5 复测验收辅助</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="run">■</td><td class="milestone">◆</td><td></td><td></td></tr>
+              <tr><td>联调、测试与版本验收</td><td></td><td></td><td></td><td class="run">■</td><td></td><td></td><td class="run">■</td><td class="run">■</td><td class="run">■</td><td class="run">■</td><td></td><td></td></tr>
+              <tr><td>用户试点与迭代复盘</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="run">■</td><td class="run">■</td><td class="milestone">◆</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>关键依赖路径</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>编号</th><th>依赖</th><th>影响范围</th><th>最晚确认时间</th></tr></thead>
+            <tbody>
+              <tr><td class="strong">D1</td><td>INSIGHT 漏洞、资产、组织、状态接口</td><td class="center">P1–P5</td><td>W1 完成字段与可用性验证</td></tr>
+              <tr><td class="strong">D2</td><td>企业知识库与引用服务</td><td class="center">P1、P2、P5</td><td>W2 前确认来源范围、版本与引用格式</td></tr>
+              <tr><td class="strong">D3</td><td>工单系统 API、权限与回调</td><td class="center">P3、P4</td><td>W5 前完成沙箱和字段映射</td></tr>
+              <tr><td class="strong">D4</td><td>复测结果来源与关闭规则</td><td class="center">P5</td><td>W8 前确认数据结构与人工确认点</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="metrics">
+        <p class="section-kicker">Acceptance</p>
+        <h2>阶段验收与指标口径</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>指标</th><th>计算口径</th><th>目标</th><th>阶段</th></tr></thead>
+            <tbody>
+              <tr><td class="strong">关键平台事实测试准确率</td><td>正确事实字段数 ÷ 测试事实字段总数</td><td class="center">≥95%</td><td class="center">Phase 1</td></tr>
+              <tr><td class="strong">重要修复结论引用覆盖率</td><td>带有效引用的重要结论数 ÷ 重要结论总数</td><td class="center">≥90%</td><td class="center">Phase 1</td></tr>
+              <tr><td class="strong">待确认项触发有效率</td><td>正确触发待确认项的场景数 ÷ 应触发场景数</td><td class="center">≥95%</td><td class="center">Phase 1</td></tr>
+              <tr><td class="strong">工单必填字段完整率</td><td>已填必填字段数 ÷ 必填字段总数</td><td class="center">≥95%</td><td class="center">Phase 2</td></tr>
+              <tr><td class="strong">确认后工单创建成功率</td><td>成功创建工单数 ÷ 用户确认创建次数</td><td class="center">≥95%</td><td class="center">Phase 2</td></tr>
+              <tr><td class="strong">状态展示一致率</td><td>与工单源系统一致的记录数 ÷ 抽检记录数</td><td class="center">100%</td><td class="center">Phase 2</td></tr>
+              <tr><td class="strong">核心辅助闭环任务完成率</td><td>完成报告→工单→跟踪→复测任务数 ÷ 启动任务数</td><td class="center">≥90%</td><td class="center">Phase 3</td></tr>
+              <tr><td class="strong">关闭前人工确认率</td><td>有人工确认记录的关闭数 ÷ 经助手流程关闭总数</td><td class="center">100%</td><td class="center">Phase 3</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout">
+          <strong>口径说明：</strong>
+          事实准确率基于预先定义的关键平台事实测试集计算；引用覆盖率需同时检查“是否有引用”和“引用是否支持结论”。指标用于阶段验收，不代表模型在所有场景下绝对正确；试点样本较小，定量数据需结合任务回放和用户访谈判断。
+        </div>
+      </section>
+
+      <section id="risk">
+        <p class="section-kicker">Risk & Governance</p>
+        <h2>风险、应对与决策门</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>风险</th><th>等级</th><th>应对策略</th><th>决策点</th></tr></thead>
+            <tbody>
+              <tr><td>真实模型或知识库效果不达预期</td><td class="center risk-high">高</td><td>建立固定测试集；采用检索白名单、引用校验和待确认项；必要时降级为模板辅助。</td><td class="center">W2</td></tr>
+              <tr><td>INSIGHT 生产接口字段或稳定性不足</td><td class="center risk-high">高</td><td>W1 完成接口盘点；设置 Mock 与降级展示；明确事实字段 Owner。</td><td class="center">W1</td></tr>
+              <tr><td>工单系统权限或幂等机制不清晰</td><td class="center risk-high">高</td><td>仅创建草稿；人工确认；使用业务唯一键；保留失败重试与审计日志。</td><td class="center">W5</td></tr>
+              <tr><td>AI 建议被误认为执行指令</td><td class="center risk-medium">中</td><td>标注“建议/待确认”；关键动作二次确认；禁止自动状态变更。</td><td class="center">全程</td></tr>
+              <tr><td>试点用户不足或场景过于单一</td><td class="center risk-medium">中</td><td>W8 前锁定试点人员，覆盖不同漏洞严重度与处置路径。</td><td class="center">W8</td></tr>
+              <tr><td>P5 复测数据源未就绪</td><td class="center risk-medium">中</td><td>先支持人工录入或导入结果与清单汇总，不阻塞闭环概念验证。</td><td class="center">W8</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="grid three">
+          <article class="decision"><strong>Phase 1 Go / No-Go</strong><br>事实准确率或重要结论引用覆盖率未达标，不进入生产工单创建。</article>
+          <article class="decision"><strong>Phase 2 Go / No-Go</strong><br>权限、必填字段、幂等或状态回流未通过，不启动真实工单试点。</article>
+          <article class="decision"><strong>Phase 3 Go / No-Go</strong><br>依据任务完成率、用户反馈与接口稳定性决定扩大、迭代或收缩范围。</article>
+        </div>
+
+        <h3>评审节奏</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>频率</th><th>机制</th><th>关注内容</th><th>参与者</th></tr></thead>
+            <tbody>
+              <tr><td>每周</td><td>Roadmap 周会</td><td>进度、风险、依赖与指标变化</td><td>产品 + 研发 + AI + 测试</td></tr>
+              <tr><td>双周</td><td>阶段 Demo</td><td>可运行能力、边界案例与待确认问题</td><td>项目组 + 业务代表</td></tr>
+              <tr><td>W4 / W8</td><td>阶段验收</td><td>按阶段指标做 Go / No-Go 决策</td><td>产品负责人 + 安全负责人</td></tr>
+              <tr><td>W10–W12</td><td>用户试点</td><td>任务回放、漏斗数据与半结构化访谈</td><td>试点用户 + 产品</td></tr>
+              <tr><td>W12</td><td>季度复盘</td><td>目标达成、未决风险与下一季度建议</td><td>核心干系人</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <p class="section-kicker">End State</p>
+        <h2>季度结束时的产品形态</h2>
+        <p class="lead">用户可以基于 INSIGHT 的确定性事实生成带引用的可信报告，将经审核的内容转化为修复计划和工单草稿，在人工确认后创建工单并跟踪负责人、状态与 SLA，最后使用复测清单汇总结果并完成验收确认。</p>
+        <div class="callout green">
+          <strong>最终原则：</strong>
+          该版本仍是“人机协同”的运营助手。AI 提升信息处理和流程准备效率，但不取代权限控制、业务决策和最终责任。
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">INSIGHT AI 漏洞运营助手 · 2026 Q4 产品 Roadmap · V1.0</footer>
+  </div>
+</body>
+</html>
